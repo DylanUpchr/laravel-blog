@@ -22,10 +22,10 @@
     <tbody>
         @foreach($posts as $post)
         <tr>
-            <td>{{$post->post_id}}</td>
+            <td><a href="{{ route('posts.show', $post->post_id)}}">{{$post->post_id}}</a></td>
             <td>{{$post->post_comment}}</td>
             <td>
-                <a href="{{ route('posts.edit',$post->post_id)}}" class="btn btn-primary">Edit</a>
+                <a href="{{ route('posts.edit', $post->post_id)}}" class="btn btn-primary">Edit</a>
             </td>
             <td>
                 <form action="{{ route('posts.destroy', $post->post_id)}}" method="post">
