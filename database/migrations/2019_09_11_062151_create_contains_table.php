@@ -14,7 +14,11 @@ class CreateContainsTable extends Migration
     public function up()
     {
         Schema::create('contains', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigInteger('idPost')->unsigned();
+            $table->bigInteger('idMedia')->unsigned();
+            $table->foreign('idPost')->references('idPost')->on('posts');
+            $table->foreign('idMedia')->references('idMedia')->on('media');
+            $table->index(['idPost', 'idMedia']);
             $table->timestamps();
         });
     }
