@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    protected $primaryKey = 'post_id';
     protected $fillable = [
-        'idPost',
-        'comment',
-        'datePost'
+        'post_id',
+        'post_comment'
     ];
 }
