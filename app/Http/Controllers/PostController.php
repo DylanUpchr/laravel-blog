@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Media;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
@@ -44,7 +45,22 @@ class PostController extends Controller
         $post = new Post([
             'post_comment' => $request->get('post_comment')
         ]);
-        $post->save();
+        $files = $request->file('post_files');
+        Log::debug($files);
+
+        $id = $post->save();
+
+        foreach($files as $file){
+            $filename = $file->store('public/media');
+            $media = new Media([
+                'media_type' => Storage::mimeType($filename),
+                'media_name' => $filename
+            ]);
+            Log::debug($media);
+            
+            $media->save();
+        }
+
         return redirect('/posts')->with('success', 'Post saved!');
     }
 

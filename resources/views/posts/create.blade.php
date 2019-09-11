@@ -14,12 +14,16 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('posts.store') }}">
+      <form method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
           @csrf
           <div class="form-group">    
               <label for="post_comment">Comment:</label>
               <input type="text" class="form-control" name="post_comment"/>
-          </div>                   
+          </div>
+          <div>
+            <label for="post_files">File</label>
+            <input type="file" name="post_files" multiple/>
+          </div>
           <button type="submit" class="btn btn-primary">Add post</button>
       </form>
   </div>
