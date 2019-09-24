@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Media;
+use App\MediaPost;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -50,8 +51,8 @@ class PostController extends Controller
         $files = $request->file('post_files');
 
         $post->save();
-        $post_id = $post->id;
-
+        $post_id = $post->post_id;
+        
         foreach($files as $file){
             $filename = $file->store('media', 'public');
             $media = new Media([
@@ -60,6 +61,14 @@ class PostController extends Controller
             ]);
             
             $media->save();
+            $media_id = $media->media_id;
+
+
+            $mediaPost = new MediaPost([
+                'post_id' => $post_id,
+                'media_id' => $media_id
+            ]);
+            $mediaPost->save();
         }
 
         return redirect('/posts')->with('success', 'Post saved!');

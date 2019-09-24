@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMediaPostTable extends Migration
+class CreateMediaPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMediaPostTable extends Migration
      */
     public function up()
     {
-        Schema::create('media_post', function (Blueprint $table) {
+        Schema::create('media_posts', function (Blueprint $table) {
             $table->bigInteger('post_id')->unsigned();
             $table->bigInteger('media_id')->unsigned();
             $table->foreign('post_id')->references('post_id')->on('posts');
@@ -30,6 +30,6 @@ class CreateMediaPostTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('media_post');
+        Schema::dropIfExists('media_posts');
     }
 }
