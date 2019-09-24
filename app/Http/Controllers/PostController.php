@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Media;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -39,24 +40,24 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'post_comment'=>'required'
+            'post_comment'=>'required',
+            'post_files.*' => 'required|mimes:png,jpg,mp4,mp3'
         ]);
 
         $post = new Post([
             'post_comment' => $request->get('post_comment')
         ]);
         $files = $request->file('post_files');
-        Log::debug($files);
 
-        $id = $post->save();
+        $post->save();
+        $post_id = $post->id;
 
         foreach($files as $file){
-            $filename = $file->store('public/media');
+            $filename = $file->store('media', 'public');
             $media = new Media([
-                'media_type' => Storage::mimeType($filename),
+                'media_type' => Storage::mimeType("public/" . $filename),
                 'media_name' => $filename
             ]);
-            Log::debug($media);
             
             $media->save();
         }

@@ -21,7 +21,7 @@ class MediaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($media_id, $media_type, $media_name)
     {
         //
     }

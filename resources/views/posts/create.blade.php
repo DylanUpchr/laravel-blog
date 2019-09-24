@@ -22,7 +22,7 @@
           </div>
           <div>
             <label for="post_files">File</label>
-            <input type="file" name="post_files" multiple/>
+            <input type="file" name="post_files[]"/>
           </div>
           <button type="submit" class="btn btn-primary">Add post</button>
       </form>
