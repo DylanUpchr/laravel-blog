@@ -14,21 +14,23 @@ class Post extends Model
         'post_id',
         'post_comment'
     ];
-    public function delete()
-    {
-        /*public function delete(){
+    /**
+     * Get all images associated to this post
+     */
+    public function GetImages(){
+        $mediaArray = [];
+
         $mediaPosts = MediaPost::all()->where('post_id', $this->post_id);
         foreach($mediaPosts as $key => $mediaPost){
-            //$mediaPost->delete();
             $media = Media::find($mediaPost->media_id);
-            $media->delete();
             //dd($media);
-            /*\DB::transaction(function() use ($media, $mediaPost) {
-                //$media->delete();
-                //$mediaPost->delete();
-            });
+            $mediaArray[] = $media;
         }
-    }*/
+
+        return $mediaArray;
+    }
+    public function delete()
+    {
         $mediaPosts = MediaPost::all()->where('post_id', $this->post_id);
         foreach($mediaPosts as $key => $mediaPost){
             $media = Media::find($mediaPost->media_id);

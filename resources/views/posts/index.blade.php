@@ -13,16 +13,34 @@
         <a style="margin: 19px;" href="{{ route('posts.create')}}" class="btn btn-primary">New post</a>
     </div>   
   <table class="table table-striped">
-    <thead>
+    <!--<thead>
         <tr>
           <td>ID</td>
           <td>Comment</td>
         </tr>
-    </thead>
+    </thead>-->
     <tbody>
         @foreach($posts as $post)
         <tr>
-            <td><a href="{{ route('posts.show', $post->post_id)}}">{{$post->post_id}}</a></td>
+            <td>
+                <div>
+                    <!--Image-->
+                    @foreach($post->GetImages() as $image)
+                    <img src="{{ url('') . '/storage/' . $image->media_name }}" alt="Post Image" title="{{$post->post_comment}}">
+                    @endforeach
+                    <!--Footer-->
+                    <div>
+                    <a href="{{ route('posts.show', $post->post_id)}}">{{$post->post_id}}</a>
+                    <p>{{$post->post_comment}}</p>
+                    <form action="{{ route('posts.destroy', $post->post_id)}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                    </div>
+                </div>
+            </td>
+            <!--<td><a href="{{ route('posts.show', $post->post_id)}}">{{$post->post_id}}</a></td>
             <td>{{$post->post_comment}}</td>
             <td>
                 <a href="{{ route('posts.edit', $post->post_id)}}" class="btn btn-primary">Edit</a>
@@ -33,7 +51,7 @@
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
-            </td>
+            </td>-->
         </tr>
         @endforeach
     </tbody>
