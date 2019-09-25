@@ -17,13 +17,13 @@
         @foreach($posts as $post)
         <tr>
             <td>
-                <div>
+                <div class="card">
                     <!--Image-->
                     @foreach($post->GetImages() as $image)
                     <img id="postImage" src="{{ url('') . '/storage/' . $image->media_name }}" alt="Post Image" title="{{$post->post_comment}}">
                     @endforeach
                     <!--Footer-->
-                    <div>
+                    <div class="card-body">
                     <a id="postID" href="{{ route('posts.show', $post->post_id)}}">{{$post->post_id}}</a>
                     <p id="postComment" >{{$post->post_comment}}</p>
                     <form id="postActionForm" action="{{ route('posts.destroy', $post->post_id)}}" method="post">

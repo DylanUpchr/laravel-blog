@@ -18,7 +18,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::whereNotNull('post_id')
+        ->get();
+        $posts = $posts->reverse();
         return view('posts.index', compact('posts'));
     }
 
