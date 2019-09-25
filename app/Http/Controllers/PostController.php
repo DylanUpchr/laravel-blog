@@ -42,13 +42,16 @@ class PostController extends Controller
     {
         $request->validate([
             'post_comment'=>'required',
-            'post_files.*' => 'required|mimes:png,jpg,mp4,mp3'
+            'post_files.*' => 'required|mimes:png,jpg,jpeg,mp4,mp3'
         ]);
 
         $post = new Post([
             'post_comment' => $request->get('post_comment')
         ]);
         $files = $request->file('post_files');
+        if ($files === null){
+            $files=[];
+        }
 
         $post->save();
         $post_id = $post->post_id;
