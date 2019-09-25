@@ -23,7 +23,7 @@
           </div>                   
           <button type="submit" class="btn btn-primary">Edit post</button>
       </form>
+    </div>
   </div>
-</div>
 </div>
 @endsection
