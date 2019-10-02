@@ -12,7 +12,7 @@
     <div>
         <a style="margin: 19px;" href="{{ route('posts.create')}}" class="btn btn-primary">New post</a>
     </div>   
-  <table class="table">
+  <table class="table" id="postTable">
     <tbody>
         @foreach($posts as $post)
         <tr>

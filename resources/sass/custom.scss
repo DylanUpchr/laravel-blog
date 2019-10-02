@@ -11,7 +11,7 @@
 /*#postID{
 
 }*/
-table{
+#postTable{
     width: 80% !important;
     margin-left: auto;
     margin-right: auto;
@@ -40,4 +40,7 @@ table{
 .card-body #postActionFormContainer{
     float: right;
     //display: inline;
+}
+table tr td #editPostImage{
+    height: 150px;
 }

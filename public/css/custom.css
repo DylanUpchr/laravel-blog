@@ -10648,7 +10648,7 @@ a.text-dark:focus {
 
 }*/
 
-table {
+#postTable {
   width: 80% !important;
   margin-left: auto;
   margin-right: auto;
@@ -10683,5 +10683,9 @@ table {
 
 .card-body #postActionFormContainer {
   float: right;
+}
+
+table tr td #editPostImage {
+  height: 150px;
 }
 

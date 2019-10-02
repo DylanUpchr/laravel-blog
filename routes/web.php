@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::resource('posts', 'PostController');
+Route::delete('posts/{post}/medias/{media}', 'PostController@destroyMedia')->name('posts.destroyMedia');
 
 Auth::routes();
 

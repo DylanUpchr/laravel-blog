@@ -123,7 +123,7 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified post.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -133,5 +133,16 @@ class PostController extends Controller
         $post = Post::find($id);
         $post->delete();
         return redirect('/posts')->with('success', 'Post deleted!');
+    }
+    /**
+     * Remove the specified media.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyMedia(Post $post, Media $media)
+    {
+        $media->delete();
+        return redirect('/posts/edit/'.$post->post_id)->with('success', 'Media deleted!');
     }
 }
