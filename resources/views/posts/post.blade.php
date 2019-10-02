@@ -14,7 +14,12 @@
         @endif
         <span id="postComment" >{{$post->post_comment}}</span>
         <span id="postActionFormContainer">
-            <form id="postActionForm" action="{{ route('posts.destroy', $post->post_id)}}" method="post">
+            <form class="postActionForm" action="{{ route('posts.edit', $post->post_id)}}" method="get">
+                @csrf
+                @method('GET')
+                <button class="btn btn-primary" type="submit">Edit</button>
+            </form>
+            <form class="postActionForm" action="{{ route('posts.destroy', $post->post_id)}}" method="post">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger" type="submit">Delete</button>

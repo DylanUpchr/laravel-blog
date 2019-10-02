@@ -10673,11 +10673,15 @@ table {
   max-height: 100%;
 }
 
-#postActionForm {
-  float: right;
+.postActionForm .btn {
+  margin-left: 5px;
 }
 
-#postActionFormContainer {
+.postActionForm {
   display: inline;
+}
+
+.card-body #postActionFormContainer {
+  float: right;
 }
 
