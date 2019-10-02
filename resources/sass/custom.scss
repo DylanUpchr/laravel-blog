@@ -11,12 +11,29 @@
 /*#postID{
 
 }*/
-#postImage{
+table{
+    width: 80% !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+.post{
     width: 100%;
 }
-/*#postComment{
-    
-}*/
+#postImage{
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+#postComment{
+    float: left;
+    max-width: 75%;
+    max-height: 100%;
+}
 #postActionForm{
     float: right;
+}
+#postActionFormContainer{
+    display: inline;
 }

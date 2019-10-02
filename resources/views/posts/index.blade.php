@@ -17,22 +17,9 @@
         @foreach($posts as $post)
         <tr>
             <td>
-                <div class="card">
-                    <!--Image-->
-                    @foreach($post->GetImages() as $image)
-                      <img id="postImage" src="{{ url('') . '/storage/' . $image->media_name }}" alt="Post Image" title="{{$post->post_comment}}">
-                    @endforeach
-                    <!--Footer-->
-                    <div class="card-body">
-                      <a id="postID" href="{{ route('posts.show', $post->post_id)}}">{{$post->post_id}}</a>
-                      <p id="postComment" >{{$post->post_comment}}</p>
-                      <form id="postActionForm" action="{{ route('posts.destroy', $post->post_id)}}" method="post">
-                          @csrf
-                          @method('DELETE')
-                          <button class="btn btn-danger" type="submit">Delete</button>
-                      </form>
-                    </div>
-                </div>
+              @component('posts.post')
+                @slot('posts', ['post' => $post, 'showID' => true])
+              @endcomponent
             </td>
         </tr>
         @endforeach
