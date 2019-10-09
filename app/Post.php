@@ -23,7 +23,6 @@ class Post extends Model
         $mediaPosts = MediaPost::all()->where('post_id', $this->post_id);
         foreach($mediaPosts as $key => $mediaPost){
             $media = Media::find($mediaPost->media_id);
-            //dd($media);
             $mediaArray[] = $media;
         }
 
@@ -34,7 +33,6 @@ class Post extends Model
         $mediaPosts = MediaPost::all()->where('post_id', $this->post_id);
         foreach($mediaPosts as $key => $mediaPost){
             $media = Media::find($mediaPost->media_id);
-            //dd($media);
             Storage::delete("public/" . $media->media_name);
             $media->delete();
         }
