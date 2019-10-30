@@ -47,15 +47,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['fields'],
+  props: ['ppost', 'pshowid', 'pimages', 'proutes'],
   data: function data() {
     return {
-      post: this.data
+      post: this.ppost,
+      showID: this.pshowid,
+      images: this.pimages,
+      routes: this.routes
     };
   },
   mounted: function mounted() {
-    console.log('component mounted');
+    console.log(this.pimages);
   }
 });
 
@@ -591,9 +639,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("p", _vm._b({}, "p", _vm.post, false), [
-    _vm._v(_vm._s(_vm.post.post_id))
-  ])
+  return _c(
+    "div",
+    { staticClass: "post card" },
+    [
+      _vm._l(_vm.images, function(image) {
+        return _c("img", {
+          key: image.media_id,
+          attrs: {
+            id: "postImage",
+            src: "/blog/public/storage/" + image.media_name,
+            alt: "Post Image",
+            title: _vm.post.post_comment
+          }
+        })
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _vm.showID
+          ? _c("span", [
+              _c("a", { attrs: { id: "postID", href: _vm.routes.show } }, [
+                _vm._v(
+                  "\r\n                " +
+                    _vm._s(_vm.post.post_id) +
+                    "\r\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("br")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("span", { attrs: { id: "postComment" } }, [
+          _vm._v(_vm._s(_vm.post.post_comment))
+        ]),
+        _vm._v(" "),
+        _c("span", { attrs: { id: "postActionFormContainer" } }, [
+          _c(
+            "form",
+            {
+              staticClass: "postActionForm",
+              attrs: { action: _vm.routes.edit, method: "GET" }
+            },
+            [
+              _c(
+                "button",
+                { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+                [_vm._v("\r\n                    Edit\r\n                ")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              staticClass: "postActionForm",
+              attrs: { action: _vm.routes.destroy, method: "delete" }
+            },
+            [
+              _c(
+                "button",
+                { staticClass: "btn btn-danger", attrs: { type: "submit" } },
+                [_vm._v("\r\n                    Delete\r\n                ")]
+              )
+            ]
+          )
+        ])
+      ])
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

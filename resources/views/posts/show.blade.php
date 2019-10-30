@@ -17,9 +17,14 @@
     @endcomponent--}}
     <div id="app">
       <post-component 
-        :fields = "[
-          {post: {{$post}}}
-        ]"
+        :ppost = "{{$post}}"
+        :pshowid = "false"
+        :pimages = "{{json_encode($post->GetImages())}}"
+        :proutes = "{{json_encode([
+          'show' => route('posts.show', $post->post_id),
+          'edit' => route('posts.edit', $post->post_id),
+          'destroy' => route('posts.destroy', $post->post_id)
+        ])}}"
       ></post-component>
     </div>
 <div>
