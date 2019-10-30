@@ -21,3 +21,7 @@ Route::delete('posts/{post}/medias/{media}', 'PostController@destroyMedia')->nam
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

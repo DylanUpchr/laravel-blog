@@ -12,9 +12,16 @@
     <div>
     <a style="margin: 19px;" href="{{ route('posts.index')}}" class="btn btn-primary"></span>Back</a>
     </div>   
-    @component('posts.post')
+    {{--@component('posts.post')
       @slot('posts', ['post' => $post, 'showID' => false])
-    @endcomponent
+    @endcomponent--}}
+    <div id="app">
+      <post-component 
+        :fields = "[
+          {post: {{$post}}}
+        ]"
+      ></post-component>
+    </div>
 <div>
 </div>
 @endsection
