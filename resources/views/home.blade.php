@@ -6,7 +6,6 @@
         <div class="col-md-12">
     <h1 class="display-3">Home</h1>   
     <div>
-        <a href="{{url('/posts')}}" class="btn btn-primary">Posts</a>
       </div>   
             <div class="card">
                 <div class="card-header">Dashboard</div>
@@ -18,7 +17,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    You are logged in, {{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}!
                 </div>
             </div>
         </div>
