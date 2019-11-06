@@ -10,8 +10,8 @@
   @endif
     <h1 class="display-3">Posts</h1>   
     <div>
-        <a style="margin: 19px;" href="{{url('/home')}}" class="btn btn-primary">Home</a>
-        <a style="margin: 19px;" href="{{ route('posts.create')}}" class="btn btn-primary">New post</a>
+        <a href="{{url('/home')}}" class="btn btn-primary">Home</a>
+        <a href="{{ route('posts.create')}}" class="btn btn-primary">New post</a>
     </div>   
   <table class="table" id="postTable">
     <tbody>

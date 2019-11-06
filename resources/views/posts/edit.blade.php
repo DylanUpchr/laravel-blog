@@ -15,8 +15,8 @@
       </div><br />
     @endif
     <div>
-    <a style="margin: 10px;" href="{{ route('posts.index')}}" class="btn btn-primary"></span>Back</a>
-    <a style="margin: 10px;" href="{{ route('posts.create')}}" class="btn btn-primary">Add media</a>
+    <a href="{{ route('posts.index')}}" class="btn btn-primary"></span>Back</a>
+    <a href="{{ route('posts.create')}}" class="btn btn-primary">Add media</a>
     </div>   
       <table class="table">
         <thead>

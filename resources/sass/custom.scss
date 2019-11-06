@@ -7,10 +7,12 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-// Post Style
-/*#postID{
+//Primary button style
+.btn-primary{
+    margin: 10px !important;
+}
 
-}*/
+// Post Styles
 #postTable{
     width: 80% !important;
     margin-left: auto;

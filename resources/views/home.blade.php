@@ -1,9 +1,13 @@
-@extends('layouts.app')
+@extends('base')
 
-@section('content')
+@section('main')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
+    <h1 class="display-3">Home</h1>   
+    <div>
+        <a href="{{url('/posts')}}" class="btn btn-primary">Posts</a>
+      </div>   
             <div class="card">
                 <div class="card-header">Dashboard</div>
 

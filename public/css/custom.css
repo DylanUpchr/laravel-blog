@@ -11100,9 +11100,9 @@ a.text-dark:focus {
   }
 }
 
-/*#postID{
-
-}*/
+.btn-primary {
+  margin: 10px !important;
+}
 
 #postTable {
   width: 80% !important;
