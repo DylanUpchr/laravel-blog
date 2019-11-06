@@ -31,11 +31,12 @@
                 >
                     Edit
                 </button>
+                <input type="hidden" name="_token" :value="csrf">
             </form>
             <form 
                 class="postActionForm" 
-                :action="routes.destroy" 
-                method="delete"
+                :action="routes.destroy"
+                method="POST"
             >
                 <button 
                     class="btn btn-danger" 
@@ -43,6 +44,8 @@
                 >
                     Delete
                 </button>
+                <input type="hidden" name="_token" :value="csrf">
+                <input type="hidden" name="_method" value="DELETE">
             </form>
         </span>
     </div>
@@ -61,11 +64,12 @@ export default {
             post: this.ppost,
             showID: this.pshowid,
             images: this.pimages,
-            routes: this.routes
+            routes: this.proutes,
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         }
     },
     mounted() {
-        console.log(this.pimages);
+        console.log(this.routes);
     },    
 }
 </script>

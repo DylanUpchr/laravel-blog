@@ -92,6 +92,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['ppost', 'pshowid', 'pimages', 'proutes'],
   data: function data() {
@@ -99,11 +102,12 @@ __webpack_require__.r(__webpack_exports__);
       post: this.ppost,
       showID: this.pshowid,
       images: this.pimages,
-      routes: this.routes
+      routes: this.proutes,
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
   mounted: function mounted() {
-    console.log(this.pimages);
+    console.log(this.routes);
   }
 });
 
@@ -686,7 +690,12 @@ var render = function() {
                 "button",
                 { staticClass: "btn btn-primary", attrs: { type: "submit" } },
                 [_vm._v("\r\n                    Edit\r\n                ")]
-              )
+              ),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", name: "_token" },
+                domProps: { value: _vm.csrf }
+              })
             ]
           ),
           _vm._v(" "),
@@ -694,14 +703,23 @@ var render = function() {
             "form",
             {
               staticClass: "postActionForm",
-              attrs: { action: _vm.routes.destroy, method: "delete" }
+              attrs: { action: _vm.routes.destroy, method: "POST" }
             },
             [
               _c(
                 "button",
                 { staticClass: "btn btn-danger", attrs: { type: "submit" } },
                 [_vm._v("\r\n                    Delete\r\n                ")]
-              )
+              ),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", name: "_token" },
+                domProps: { value: _vm.csrf }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", name: "_method", value: "DELETE" }
+              })
             ]
           )
         ])

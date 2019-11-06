@@ -1,6 +1,9 @@
 @extends('base')
 
 @section('main')
+<!-- CSRF Token -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <div class="row">
 <div class="col-sm-12">
 @if(session()->get('success'))
@@ -11,10 +14,7 @@
   <h1 class="display-3">Post {{ $post->post_id }}</h1>   
     <div>
     <a style="margin: 19px;" href="{{ route('posts.index')}}" class="btn btn-primary"></span>Back</a>
-    </div>   
-    {{--@component('posts.post')
-      @slot('posts', ['post' => $post, 'showID' => false])
-    @endcomponent--}}
+    </div>
     <div id="app">
       <post-component 
         :ppost = "{{$post}}"
