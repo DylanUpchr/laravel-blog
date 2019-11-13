@@ -12,7 +12,8 @@ class Post extends Model
     protected $primaryKey = 'post_id';
     protected $fillable = [
         'post_id',
-        'post_comment'
+        'post_comment',
+        'user_id'
     ];
     /**
      * Get all images associated to this post

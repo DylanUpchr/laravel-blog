@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Post;
 use App\Media;
 use App\MediaPost;
@@ -11,6 +12,12 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public static function getPostsByUser($userID){
+        $posts = Post::where('user_id', $userID)
+        ->get();
+        $posts = $posts->reverse();
+        return $posts;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +30,6 @@ class PostController extends Controller
         $posts = $posts->reverse();
         return view('posts.index', compact('posts'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -42,41 +48,47 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'post_comment'=>'required',
-            'post_files.*' => 'required|mimes:png,jpg,jpeg,mp4,mp3'
-        ]);
-
-        $post = new Post([
-            'post_comment' => $request->get('post_comment')
-        ]);
-        $files = $request->file('post_files');
-        if ($files === null){
-            $files=[];
-        }
-
-        $post->save();
-        $post_id = $post->post_id;
-        
-        foreach($files as $file){
-            $filename = $file->store('media', 'public');
-            $media = new Media([
-                'media_type' => Storage::mimeType("public/" . $filename),
-                'media_name' => $filename
+        if(Auth::check()){
+            $request->validate([
+                'post_comment'=>'required',
+                'post_files.*' => 'required|mimes:png,jpg,jpeg,mp4,mp3'
             ]);
+
+            $post = new Post([
+                'post_comment' => $request->get('post_comment'),
+                'user_id' => Auth::user()->id
+            ]);
+            $files = $request->file('post_files');
+            if ($files === null){
+                $files=[];
+            }
+
+            $post->save();
+            $post_id = $post->post_id;
             
-            $media->save();
-            $media_id = $media->media_id;
+            foreach($files as $file){
+                $filename = $file->store('media', 'public');
+                $media = new Media([
+                    'media_type' => Storage::mimeType("public/" . $filename),
+                    'media_name' => $filename
+                ]);
+                
+                $media->save();
+                $media_id = $media->media_id;
 
 
-            $mediaPost = new MediaPost([
-                'post_id' => $post_id,
-                'media_id' => $media_id
-            ]);
-            $mediaPost->save();
+                $mediaPost = new MediaPost([
+                    'post_id' => $post_id,
+                    'media_id' => $media_id
+                ]);
+                $mediaPost->save();
+            }
+
+            return redirect('/posts')->with('success', 'Post saved!');
         }
-
-        return redirect('/posts')->with('success', 'Post saved!');
+        else{
+            return redirect('/posts')->with('error', 'Please log in to create a post.');
+        }
     }
 
     /**

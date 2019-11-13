@@ -16,9 +16,16 @@
     <a style="margin: 19px;" href="{{ route('posts.index')}}" class="btn btn-primary"></span>Back</a>
     </div>
     <div id="app">
+      @php
+      $user = App\User::find($post->user_id);
+      $currentUserID = Auth::user()->id;
+      @endphp
       <post-component 
         :ppost = "{{$post}}"
         :pshowid = "false"
+        :puser = "{{$user}}"
+        :pshowuserid = "true"
+        :pcurrentuserid = "{{$currentUserID}}"
         :pimages = "{{json_encode($post->GetImages())}}"
         :proutes = "{{json_encode([
           'show' => route('posts.show', $post->post_id),

@@ -10,38 +10,32 @@
     <!--Footer-->
     <div class="card-body">
         <span v-if="showID">
-            <a 
-                id="postID" 
-                :href="routes.show"
-            >
+            <a id="postID" :href="routes.show">
                 {{post.post_id}}
             </a>
             <br/>
         </span>
-        <span id="postComment" >{{post.post_comment}}</span>
+        <span id="postComment" >{{post.post_comment}}</span><br/>
+        <span v-if="showuserid && user" id="postUsername">Posted by: {{user.name}}</span>
         <span id="postActionFormContainer">
-            <form 
+            <form
+                v-if="user.id == currentUserID"
                 class="postActionForm" 
                 :action="routes.edit" 
                 method="GET"
             >
-                <button 
-                    class="btn btn-primary" 
-                    type="submit"
-                >
+                <button class="btn btn-primary" type="submit">
                     Edit
                 </button>
                 <input type="hidden" name="_token" :value="csrf">
             </form>
-            <form 
+            <form
+                v-if="user.id == currentUserID"
                 class="postActionForm" 
                 :action="routes.destroy"
                 method="POST"
             >
-                <button 
-                    class="btn btn-danger" 
-                    type="submit"
-                >
+                <button class="btn btn-danger" type="submit">
                     Delete
                 </button>
                 <input type="hidden" name="_token" :value="csrf">
@@ -56,6 +50,9 @@ export default {
     props: [
         'ppost',
         'pshowid',
+        'puser',
+        'pshowuserid',
+        'pcurrentuserid',
         'pimages',
         'proutes'
         ],
@@ -63,12 +60,16 @@ export default {
         return{
             post: this.ppost,
             showID: this.pshowid,
+            user: this.puser,
+            showuserid: this.pshowuserid,
+            currentUserID: this.pcurrentuserid,
             images: this.pimages,
             routes: this.proutes,
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         }
     },
     mounted() {
+        console.log(showuserid);
     },    
 }
 </script>

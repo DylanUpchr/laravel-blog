@@ -1832,24 +1832,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['ppost', 'pshowid', 'pimages', 'proutes'],
+  props: ['ppost', 'pshowid', 'puser', 'pshowuserid', 'pcurrentuserid', 'pimages', 'proutes'],
   data: function data() {
     return {
       post: this.ppost,
       showID: this.pshowid,
+      user: this.puser,
+      showuserid: this.pshowuserid,
+      currentUserID: this.pcurrentuserid,
       images: this.pimages,
       routes: this.proutes,
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    console.log(showuserid);
+  }
 });
 
 /***/ }),
@@ -37241,51 +37240,72 @@ var render = function() {
         _c("span", { attrs: { id: "postComment" } }, [
           _vm._v(_vm._s(_vm.post.post_comment))
         ]),
+        _c("br"),
+        _vm._v(" "),
+        _vm.showuserid && _vm.user
+          ? _c("span", { attrs: { id: "postUsername" } }, [
+              _vm._v("Posted by: " + _vm._s(_vm.user.name))
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("span", { attrs: { id: "postActionFormContainer" } }, [
-          _c(
-            "form",
-            {
-              staticClass: "postActionForm",
-              attrs: { action: _vm.routes.edit, method: "GET" }
-            },
-            [
-              _c(
-                "button",
-                { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-                [_vm._v("\r\n                    Edit\r\n                ")]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                attrs: { type: "hidden", name: "_token" },
-                domProps: { value: _vm.csrf }
-              })
-            ]
-          ),
+          _vm.user.id == _vm.currentUserID
+            ? _c(
+                "form",
+                {
+                  staticClass: "postActionForm",
+                  attrs: { action: _vm.routes.edit, method: "GET" }
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("\r\n                    Edit\r\n                ")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_token" },
+                    domProps: { value: _vm.csrf }
+                  })
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "form",
-            {
-              staticClass: "postActionForm",
-              attrs: { action: _vm.routes.destroy, method: "POST" }
-            },
-            [
-              _c(
-                "button",
-                { staticClass: "btn btn-danger", attrs: { type: "submit" } },
-                [_vm._v("\r\n                    Delete\r\n                ")]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                attrs: { type: "hidden", name: "_token" },
-                domProps: { value: _vm.csrf }
-              }),
-              _vm._v(" "),
-              _c("input", {
-                attrs: { type: "hidden", name: "_method", value: "DELETE" }
-              })
-            ]
-          )
+          _vm.user.id == _vm.currentUserID
+            ? _c(
+                "form",
+                {
+                  staticClass: "postActionForm",
+                  attrs: { action: _vm.routes.destroy, method: "POST" }
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "submit" }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                    Delete\r\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_token" },
+                    domProps: { value: _vm.csrf }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_method", value: "DELETE" }
+                  })
+                ]
+              )
+            : _vm._e()
         ])
       ])
     ],
