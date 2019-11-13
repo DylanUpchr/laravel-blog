@@ -1846,9 +1846,7 @@ __webpack_require__.r(__webpack_exports__);
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
-  mounted: function mounted() {
-    console.log(showuserid);
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),

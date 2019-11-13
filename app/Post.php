@@ -34,8 +34,10 @@ class Post extends Model
         $mediaPosts = MediaPost::all()->where('post_id', $this->post_id);
         foreach($mediaPosts as $key => $mediaPost){
             $media = Media::find($mediaPost->media_id);
-            Storage::delete("public/" . $media->media_name);
-            $media->delete();
+            if($media->delete()) {
+                Storage::delete("public/" . $media->media_name);
+            }
+            
         }
         parent::delete();
     }
